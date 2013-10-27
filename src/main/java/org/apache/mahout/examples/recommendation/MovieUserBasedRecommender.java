@@ -1,25 +1,28 @@
 package org.apache.mahout.examples.recommendation;
 
-import org.apache.mahout.cf.taste.impl.model.file.*;
-import org.apache.mahout.cf.taste.impl.neighborhood.*;
-import org.apache.mahout.cf.taste.impl.recommender.*;
-import org.apache.mahout.cf.taste.impl.similarity.*;
-import org.apache.mahout.cf.taste.model.*;
-import org.apache.mahout.cf.taste.neighborhood.*;
-import org.apache.mahout.cf.taste.recommender.*;
-import org.apache.mahout.cf.taste.similarity.*;
+import java.io.File;
+import java.util.List;
 
-import java.io.*;
-import java.util.*;
+import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
+import org.apache.mahout.cf.taste.impl.neighborhood.NearestNUserNeighborhood;
+import org.apache.mahout.cf.taste.impl.recommender.GenericUserBasedRecommender;
+import org.apache.mahout.cf.taste.impl.similarity.PearsonCorrelationSimilarity;
+import org.apache.mahout.cf.taste.model.DataModel;
+import org.apache.mahout.cf.taste.neighborhood.UserNeighborhood;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
+import org.apache.mahout.cf.taste.recommender.Recommender;
+import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
-public class MovieRecommender {
+public class MovieUserBasedRecommender {
 
-	private MovieRecommender() {
+	private MovieUserBasedRecommender() {
 	}
 
 	public static void main(String[] args) throws Exception {
 
-		DataModel model = new FileDataModel(new File("C:/Users/surenr/git/mahout-rec/src/main/java/org/apache/mahout/examples/recommendation/MoviesList.csv"));
+		DataModel model = new FileDataModel(new File(
+				"C:/Users/surenr/git/mahout-recommender/src/main/java/org/apache/mahout/examples/recommendation/MoviesList.csv"));
+
 
 		/*
 		 * Here we are using Pearson's Correlation it has limitations such as
